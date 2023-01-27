@@ -1,1 +1,1 @@
-worker: npm i -g pm2 && pm2 start main.js && pm2 save && pm2 logs
+worker: node . --db 'mongodb+srv://ovabotz: adibaufa@cluster0.6htdldj.mongodb.net/?retryWrites=true&w=majority'
