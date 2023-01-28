@@ -25,7 +25,6 @@ return`
  > ${prefix}infobot
  > ${prefix}donasi
  > ${prefix}sewabot
- > ${prefix}gcbot
 
  *USER MENU*
  > ${prefix}verify
@@ -499,12 +498,12 @@ return`──「 *MENU DONATE* 」──
 Hi *${cekName}* ${ucapanWaktu} 👋🏻
 
 *Payment Ovo*
-Number : 6285692242215
-A/N:   V
+Number : 082223158029
+A/N:   Fadhil BOTZ
 
 *Payment Dana*
-Number : 6285692242215
-A/N: V
+Number : 082223158029
+A/N: Fadhil BOTZ
 
 ${monoSpace}Terimakasih untuk kamu yang sudah donasi untuk perkembangan bot ini ^_^${monoSpace}
 
