@@ -57,22 +57,8 @@ return`
  > ${prefix}bcaudio
  > ${prefix}bcimage
  > ${prefix}broadcast
- > ${prefix}sendbug 628xxx
- > ${prefix}philips 628xxx
- > ${prefix}philips2 628xxx
- > ${prefix}philips3 628xxx
- > ${prefix}santet @tag
- > ${prefix}santet2 @tag
- > ${prefix}santet3 @tag
- > ${prefix}virtex 628xxx
- > ${prefix}virtex2 628xxx
- > ${prefix}virtex3 628xxx
- > ${prefix}bug1 628xxx
- > ${prefix}bug2 628xxx
- > ${prefix}bug3 628xxx
- > ${prefix}bug4 628xxx
- > ${prefix}bug5 628xxx
-
+ > ${prefix}resetlist
+ 
  *STORE MENU*
  > ${prefix}kali 1 2
  > ${prefix}bagi 1 2
@@ -158,32 +144,6 @@ return`
  > ${prefix}emojmix2
  > ${prefix}emojimix2
  
- *CEK MENU*
- > ${prefix}cekjelek
- > ${prefix}cekcantik
- > ${prefix}cekganteng
- > ${prefix}ceksad
- > ${prefix}cekharam
- > ${prefix}cekhalal
- > ${prefix}cekbego
- > ${prefix}cekanjing
- > ${prefix}cekbiadab
- > ${prefix}cekramah
- > ${prefix}ceksatir
- > ${prefix}cekmanis
- > ${prefix}cekpahit
- > ${prefix}cekhitam
- > ${prefix}cekrasis
- > ${prefix}cekbaik
- > ${prefix}cekjahat
- > ${prefix}cekkaya
- > ${prefix}cekmiskin
- > ${prefix}cekpintar
- > ${prefix}cekbodoh
- > ${prefix}cekimut
- > ${prefix}cekkocak
- > ${prefix}cekkadang
- 
  *ANONYMOUS MENU*
  > ${prefix}buatroom 628xxx
  > ${prefix}room <only owner>
@@ -260,34 +220,48 @@ return`
  > ${prefix}aksaratolatin
 
  *FUN MENU*
- > ${prefix}goblokcek 
- > ${prefix}jelekcek 
- > ${prefix}gaycek
- > ${prefix}lesbicek
- > ${prefix}gantengcek 
- > ${prefix}cantikcek
- > ${prefix}begocek 
- > ${prefix}suhucek
- > ${prefix}pintercek
- > ${prefix}jagocek
- > ${prefix}nolepcek
- > ${prefix}babicek
- > ${prefix}bebancek
- > ${prefix}baikcek
- > ${prefix}jahatcek
- > ${prefix}anjingcek
- > ${prefix}haramcek
- > ${prefix}pakboycek
- > ${prefix}pakgirlcek
- > ${prefix}sangecek 
- > ${prefix}bapercek
- > ${prefix}fakboycek
- > ${prefix}alimcek
- > ${prefix}suhucek
- > ${prefix}fakgirlcek
- > ${prefix}kerencek
- > ${prefix}wibucek
-
+ > ${prefix}cekgoblok
+ > ${prefix}cekgay
+ > ${prefix}ceklesbi
+ > ${prefix}ceksuhu
+ > ${prefix}cekjago
+ > ${prefix}ceknolep
+ > ${prefix}cekbabi
+ > ${prefix}cekbeban
+ > ${prefix}cekpakboy
+ > ${prefix}cekpakgirl
+ > ${prefix}ceksange 
+ > ${prefix}cekbaper
+ > ${prefix}cekfakboy
+ > ${prefix}cekalim
+ > ${prefix}cekfakgirl
+ > ${prefix}cekkeren
+ > ${prefix}cekwibu
+ > ${prefix}cekjelek
+ > ${prefix}cekcantik
+ > ${prefix}cekganteng
+ > ${prefix}ceksad
+ > ${prefix}cekharam
+ > ${prefix}cekhalal
+ > ${prefix}cekbego
+ > ${prefix}cekanjing
+ > ${prefix}cekbiadab
+ > ${prefix}cekramah
+ > ${prefix}ceksatir
+ > ${prefix}cekmanis
+ > ${prefix}cekpahit
+ > ${prefix}cekhitam
+ > ${prefix}cekrasis
+ > ${prefix}cekbaik
+ > ${prefix}cekjahat
+ > ${prefix}cekkaya
+ > ${prefix}cekmiskin
+ > ${prefix}cekpintar
+ > ${prefix}cekbodoh
+ > ${prefix}cekimut
+ > ${prefix}cekkocak
+ > ${prefix}cekkadang
+ 
  *WALLPAPER MENU*
  > ${prefix}milf
  > ${prefix}loli
@@ -493,21 +467,12 @@ Ketik *#menu* untuk memulai bot`
 }
 
 exports.donasiBot = (cekName,ucapanWaktu) =>{
-return`──「 *MENU DONATE* 」──
+return`*Donasi Seikhlasnya* :(
 
-Hi *${cekName}* ${ucapanWaktu} 👋🏻
+Dana/Gopay/Ovo : 085692242216
+Saweria : https://saweria.co/Ova99
 
-*Payment Ovo*
-Number : 082223158029
-A/N:   Fadhil BOTZ
-
-*Payment Dana*
-Number : 082223158029
-A/N: Fadhil BOTZ
-
-${monoSpace}Terimakasih untuk kamu yang sudah donasi untuk perkembangan bot ini ^_^${monoSpace}
-
-──「 *THX FOR YOU* 」──`
+${monoSpace}Terimakasih untuk kamu yang sudah donasi untuk perkembangan bot ini ^_^${monoSpace}`
 }
 
 exports.infoOwner = () =>{
